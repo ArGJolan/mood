@@ -1,0 +1,80 @@
+<template>
+  <div id="app">
+    <router-view />
+    <div v-if="username">
+      Hello {{ username }}
+      <router-link to="/mood-entry">Add Mood Entry</router-link>
+      <router-link to="/mood-chart">View Mood Chart</router-link>
+    </div>
+  </div>
+</template>
+
+<script>
+import jwtDecode from 'jwt-decode';
+
+export default {
+  data() {
+    return {
+      username: '',
+    };
+  },
+  created() {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      this.username = jwtDecode(token).username;
+    }
+  },
+};
+</script>
+
+<style>
+body {
+  background-color: #1e1e1e;
+}
+
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  color: #ffffff;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label,
+input {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+input {
+  padding: 5px 10px;
+  background-color: #2d2d2d;
+  border: 2px solid #3e3e3e;
+  color: #ffffff;
+}
+
+button {
+  font-size: 1.2rem;
+  padding: 5px 10px;
+  background-color: #3e3e3e;
+  border: 2px solid #4f4f4f;
+  color: #ffffff;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+button:hover {
+  background-color: #4f4f4f;
+}
+</style>
