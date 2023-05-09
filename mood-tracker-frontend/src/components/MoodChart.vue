@@ -1,31 +1,44 @@
 <template>
-  <div>
-    <h2>Mood Chart</h2>
-    <line-chart :data="chartData" :colors="['#F00', '#0F0', '#00F', '#FF0', '#0FF', '#F0F']"></line-chart>
+  <div class="container">
+    <!-- <loading v-model:active="isLoading" :can-cancel="false" :is-full-page="true"></loading> -->
+    <h1>Mood Chart</h1>
+    <div class="chart-container">
+      <line-chart :data="chartData" :colors="chartOptions.colors"
+        :library="chartOptions.library"
+
+      ></line-chart>
+    </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-// import { LineChart } from "vue-chartkick";
+import api from "../api"
 
 export default {
-  // components: {
-  //   LineChart,
-  // },
   data() {
     return {
+      chartOptions: {
+        colors: ['#ff7b7b', '#ffba92', '#a4f1b0', '#ffdb89', '#d1a3e6', '#9bcdff'],
+        library: {
+          legend: {
+            fontColor: 'white'
+          },
+        }
+      },
+      isLoading: false,
       moods: [],
       errorMessage: "",
     };
   },
   async mounted() {
     try {
-      const response = await axios.get("http://localhost:3001/api/moods", {
+      this.isLoading = true
+      const response = await api.get("http://localhost:3001/api/moods", {
         headers: {
           Authorization: localStorage.getItem('authToken'),
         },
       });
+      this.isLoading = false
       this.moods = response.data.moods;
     } catch (error) {
       this.errorMessage = "Error fetching moods";
@@ -77,3 +90,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.chart-container {
+  background-color: #2b2b2b;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+}
+
+</style>

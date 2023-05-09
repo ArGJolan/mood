@@ -1,10 +1,12 @@
 <template>
   <div id="app">
-    <router-view />
-    <div v-if="username">
-      Hello {{ username }}
-      <router-link to="/mood-entry">Add Mood Entry</router-link>
-      <router-link to="/mood-chart">View Mood Chart</router-link>
+    <nav class="navbar">
+      <router-link to="/">Home</router-link>
+      <router-link to="/mood-entry">Mood Entry</router-link>
+      <router-link to="/mood-chart">Mood Chart</router-link>
+    </nav>
+    <div class="page-content">
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -76,5 +78,36 @@ button {
 
 button:hover {
   background-color: #4f4f4f;
+}
+.container {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+/* Navigation bar styles */
+.navbar {
+  background-color: #f1f1f1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem;
+  font-size: 1.25rem;
+}
+
+.navbar a {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.navbar a:hover {
+  color: #555;
+}
+
+/* Page content styles */
+.page-content {
+  margin-top: 1rem;
+  opacity: 1;
+  transition: opacity 0.5s;
 }
 </style>

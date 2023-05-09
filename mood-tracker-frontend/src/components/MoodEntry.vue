@@ -1,64 +1,70 @@
 <template>
-  <div>
+  <div class="container">
+    <!-- <loading v-model:active="isLoading" :can-cancel="false" :is-full-page="true"></loading> -->
     <h1>New Mood Entry</h1>
     <p>{{ submitMessage }}</p>
     <form @submit.prevent="submitMoodEntry">
       <label for="entry_date">Date:</label>
       <input type="date" id="entry_date" v-model="entry_date" required />
 
-      <label for="health">Health:</label>
-      <emoji-selector
-        v-model="mood.health"
-        @update:comment="mood.health_comment = $event"
-        mood-name="health"
-      />
-      <EmojiSelector v-model="health" />
+      <div class="item">
+        <label for="health">Health:</label>
+        <emoji-selector
+          v-model="mood.health"
+          @update:comment="mood.health_comment = $event"
+          mood-name="health"
+        />
+      </div>
 
-      <label for="work">work:</label>
-      <emoji-selector
-        v-model="mood.health"
-        @update:comment="mood.health_comment = $event"
-        mood-name="work"
-      />
-      <!-- <EmojiSelector v-model="work" /> -->
+      <div class="item">
+        <label for="work">work:</label>
+        <emoji-selector
+          v-model="mood.work"
+          @update:comment="mood.work_comment = $event"
+          mood-name="work"
+        />
+      </div>
 
-      <label for="romantic_relationship">romantic_relationship:</label>
-      <emoji-selector
-        v-model="mood.health"
-        @update:comment="mood.health_comment = $event"
-        mood-name="romantic_relationship"
-      />
-      <!-- <EmojiSelector v-model="romantic_relationship" /> -->
+      <div class="item">
+        <label for="romantic_relationship">romantic_relationship:</label>
+        <emoji-selector
+          v-model="mood.romantic_relationship"
+          @update:comment="mood.romantic_relationship_comment = $event"
+          mood-name="romantic_relationship"
+        />
+      </div>
 
-      <label for="family_relationships">family_relationships:</label>
-      <emoji-selector
-        v-model="mood.health"
-        @update:comment="mood.health_comment = $event"
-        mood-name="family_relationships"
-      />
-      <!-- <EmojiSelector v-model="family_relationships" /> -->
+      <div class="item">
+        <label for="family_relationships">family_relationships:</label>
+        <emoji-selector
+          v-model="mood.family_relationships"
+          @update:comment="mood.family_relationships_comment = $event"
+          mood-name="family_relationships"
+        />
+      </div>
 
-      <label for="friends">friends:</label>
-      <emoji-selector
-        v-model="mood.health"
-        @update:comment="mood.health_comment = $event"
-        mood-name="friends"
-      />
-      <!-- <EmojiSelector v-model="friends" /> -->
+      <div class="item">
+        <label for="friends">friends:</label>
+        <emoji-selector
+          v-model="mood.friends"
+          @update:comment="mood.friends_comment = $event"
+          mood-name="friends"
+        />
+      </div>
 
-      <label for="physical_wellness">physical_wellness:</label>
-      <emoji-selector
-        v-model="mood.health"
-        @update:comment="mood.health_comment = $event"
-        mood-name="physical_wellness"
-      />
-      <!-- <EmojiSelector v-model="physical_wellness" /> -->
-
-      <!-- Add similar input elements for other mood categories -->
+      <div class="item">
+        <label for="physical_wellness">physical_wellness:</label>
+        <emoji-selector
+          v-model="mood.physical_wellness"
+          @update:comment="mood.physical_wellness_comment = $event"
+          mood-name="physical_wellness"
+        />
+      </div>
 
       <textarea
+        style="margin-bottom:10px"
         v-model="mood.entry_comment"
-        placeholder="Add a comment for the entire entry..."
+        placeholder="What happened today?"
       ></textarea>
 
       <button type="submit">Submit</button>
@@ -76,8 +82,10 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
+      submitMessage: '',
+      entry_date: new Date().toISOString().substr(0, 10),
       mood: {
-        entry_date: new Date().toISOString().substr(0, 10),
         health: null,
         work: null,
         romantic_relationship: null,
@@ -119,6 +127,7 @@ export default {
           friends_comment: this.mood.friends_comment,
           physical_wellness_comment: this.mood.physical_wellness_comment,
         };
+        this.isLoading = true
         await axios.post(
           'http://localhost:3001/api/mood',
           formData,
@@ -128,6 +137,7 @@ export default {
             },
           }
         );
+        this.isLoading = false
         this.submitMessage = 'Mood entry successfully created! Redirecting to frontpage...';
         setTimeout(() => this.$router.push('/'), 3000)
       } catch (error) {
@@ -156,16 +166,8 @@ export default {
 .emoji.selected {
   opacity: 1;
 }
-
-.emoji[data-value='0'] {
-  color: #FF0000;
-}
-
-.emoji[data-value='5'] {
-  color: #FFD700;
-}
-
-.emoji[data-value='10'] {
-  color: #00FF00;
+.item {
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 </style>

@@ -1,16 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import App from './App.vue';
 import LoginRegister from './components/LoginRegister.vue';
 import MoodEntry from './components/MoodEntry.vue';
 import MoodChart from './components/MoodChart.vue';
 
 const routes = [
-  {
-    path: '/',
-    name: 'App',
-    component: App,
-    meta: { requiresAuth: true },
-  },
   {
     path: '/login',
     name: 'LoginRegister',
@@ -29,9 +22,19 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes,
+  history: createWebHistory(process.env.BASE_URL),
+  routes
 });
+
+const fadeOut = (next) => {
+  const content = document.querySelector('.page-content');
+  if (content) {
+    content.style.opacity = 0;
+  }
+  setTimeout(() => {
+    next();
+  }, 500);
+}
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
@@ -39,11 +42,21 @@ router.beforeEach((to, from, next) => {
     if (!token) {
       next({ name: 'LoginRegister' });
     } else {
-      next();
+      fadeOut(next);
     }
   } else {
-    next();
+    fadeOut(next);
   }
 });
+
+router.afterEach(() => {
+  const content = document.querySelector('.page-content');
+  if (content) {
+    setTimeout(() => {
+      content.style.opacity = 1;
+    }, 100);
+  }
+});
+
 
 export default router;

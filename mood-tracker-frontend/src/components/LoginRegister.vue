@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- <loading v-model:active="isLoading" :can-cancel="false" :is-full-page="true"></loading> -->
     <h1>Login/Register</h1>
     <form @submit.prevent="handleSubmit">
       <label for="username">Username:</label>
@@ -20,6 +21,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      isLoading: false,
       username: '',
       password: '',
       action: '',
@@ -28,6 +30,7 @@ export default {
   methods: {
     async handleSubmit() {
       try {
+        this.isLoading = true
         const response = await axios.post(
           `http://localhost:3001/api/${this.action}`,
           {
@@ -35,6 +38,7 @@ export default {
             password: this.password,
           }
         );
+        this.isLoading = false
         console.log(response)
         localStorage.setItem('authToken', response.headers['authorization']);
         this.$router.push('/');

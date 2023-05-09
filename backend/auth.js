@@ -17,7 +17,7 @@ function authenticateToken(req, res, next) {
     next();
   } catch (error) {
     console.log(error)
-    res.status(400).send('Invalid Token');
+    res.status(403).send('Invalid Token');
   }
 }
 
