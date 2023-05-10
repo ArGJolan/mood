@@ -32,7 +32,7 @@ export default {
       try {
         this.isLoading = true
         const response = await axios.post(
-          `http://localhost:3001/api/${this.action}`,
+          `http://localhost:3001/api/auth/${this.action}`,
           {
             username: this.username,
             password: this.password,

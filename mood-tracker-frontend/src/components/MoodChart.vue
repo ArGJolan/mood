@@ -33,13 +33,13 @@ export default {
   async mounted() {
     try {
       this.isLoading = true
-      const response = await api.get("http://localhost:3001/api/moods", {
+      const response = await api.get("http://localhost:3001/api/mood", {
         headers: {
           Authorization: localStorage.getItem('authToken'),
         },
       });
       this.isLoading = false
-      this.moods = response.data.moods;
+      this.moods = response.data;
     } catch (error) {
       this.errorMessage = "Error fetching moods";
       console.error(error);

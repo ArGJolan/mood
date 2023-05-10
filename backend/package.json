@@ -17,10 +17,16 @@
     "express-winston": "^4.2.0",
     "jsonwebtoken": "^9.0.0",
     "knex": "^2.4.2",
+    "module-alias": "^2.2.2",
     "pg": "^8.10.0",
     "winston": "^3.8.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
+  },
+  "_moduleAliases": {
+    "@Controller": "api/controllers",
+    "@Router": "api/routes",
+    "@Service": "api/services"
   }
 }

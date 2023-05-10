@@ -5,7 +5,7 @@
     <p>{{ submitMessage }}</p>
     <form @submit.prevent="submitMoodEntry">
       <label for="entry_date">Date:</label>
-      <input type="date" id="entry_date" v-model="entry_date" required />
+      <input type="date" id="entry_date" v-model="mood.entry_date" required />
 
       <div class="item">
         <label for="health">Health:</label>
@@ -84,8 +84,8 @@ export default {
     return {
       isLoading: false,
       submitMessage: '',
-      entry_date: new Date().toISOString().substr(0, 10),
       mood: {
+        entry_date: new Date().toISOString().substr(0, 10),
         health: null,
         work: null,
         romantic_relationship: null,
