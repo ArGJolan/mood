@@ -1,24 +1,27 @@
 <template>
   <div class="emoji-selector">
-    <span
-      v-for="value in 11"
-      :key="value"
-      class="emoji"
-      :class="{ selected: modelValue === value - 1 }"
-      @click="$emit('update:modelValue', modelValue === value - 1 ? null : value - 1)"
-      :data-value="value - 1"
-      :style="{ color: getColor(value - 1) }"
-      role="img"
-      :aria-label="getAriaLabel(value - 1)"
-    >
-      {{ getEmoji(value - 1) }}
-    </span>
+    <div class="emojis">
+      <span
+        v-for="value in 11"
+        :key="value"
+        class="emoji"
+        :class="{ selected: modelValue === value - 1 }"
+        @click="$emit('update:modelValue', modelValue === value - 1 ? null : value - 1)"
+        :data-value="value - 1"
+        :style="{ color: getColor(value - 1) }"
+        role="img"
+        :aria-label="getAriaLabel(value - 1)"
+      >
+        {{ getEmoji(value - 1) }}
+      </span>
+    </div>
     <textarea
+      v-if="modelValue !== null"
       v-model="comment"
       @input="$emit('update:comment', comment)"
-      placeholder="Add a comment..."
+      :placeholder="`Add a comment for ${moodName.toLowerCase()}...`"
+      class="materialize-textarea white-text"
     ></textarea>
-
   </div>
 </template>
 
@@ -63,10 +66,17 @@ export default {
 <style scoped>
 .emoji-selector {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
   font-size: 1.5rem;
   width: 100%;
+}
+
+.emojis {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 0.5rem;
 }
 
 .emoji {
@@ -76,5 +86,9 @@ export default {
 
 .emoji.selected {
   opacity: 1;
+}
+
+.rounded-textarea {
+  color: #ccc;
 }
 </style>

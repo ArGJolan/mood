@@ -1,12 +1,7 @@
 <template>
-  <div class="container">
-    <!-- <loading v-model:active="isLoading" :can-cancel="false" :is-full-page="true"></loading> -->
-    <h1>Mood Chart</h1>
-    <div class="chart-container">
-      <line-chart :data="chartData" :colors="chartOptions.colors"
-        :library="chartOptions.library"
-
-      ></line-chart>
+  <div class="row">
+    <div class="col s12">
+      <line-chart :data="chartData" :colors="chartOptions.colors"></line-chart>
     </div>
   </div>
 </template>

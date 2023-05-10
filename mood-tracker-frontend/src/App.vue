@@ -1,13 +1,17 @@
 <template>
   <div id="app">
-    <nav class="navbar">
-      <router-link to="/">Home</router-link>
-      <router-link to="/mood-entry">Mood Entry</router-link>
-      <router-link to="/mood-chart">Mood Chart</router-link>
+    <nav class="purple darken-4">
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Mood Tracker</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><router-link to="/mood-entry">Mood Entry</router-link></li>
+          <li><router-link to="/mood-chart">Mood Chart</router-link></li>
+        </ul>
+      </div>
     </nav>
-    <div class="page-content">
-      <router-view></router-view>
-    </div>
+    <main>
+      <router-view class="container"></router-view>
+    </main>
   </div>
 </template>
 

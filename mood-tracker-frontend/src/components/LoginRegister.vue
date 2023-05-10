@@ -1,16 +1,28 @@
 <template>
-  <div>
-    <!-- <loading v-model:active="isLoading" :can-cancel="false" :is-full-page="true"></loading> -->
-    <h1>Login/Register</h1>
-    <form @submit.prevent="handleSubmit">
-      <label for="username">Username:</label>
-      <input type="text" id="username" v-model="username" required />
-      <br />
-      <label for="password">Password:</label>
-      <input type="password" id="password" v-model="password" required />
-      <br />
-      <button type="submit" @click="login">Login</button>
-      <button type="submit" @click="register">Register</button>
+  <div class="row">
+    <form class="col s12" @submit.prevent="handleSubmit">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="username" type="text" v-model="username" required />
+          <label for="username">Username</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" v-model="password" required />
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <button class="btn waves-effect waves-light" type="submit" @click="login">
+            Login
+          </button>
+          <button class="btn waves-effect waves-light" type="submit" @click="register">
+            Register
+          </button>
+        </div>
+      </div>
     </form>
   </div>
 </template>
