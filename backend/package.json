@@ -11,18 +11,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.1.0",
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "express-winston": "^4.2.0",
-    "jsonwebtoken": "^9.0.0",
-    "knex": "^2.4.2",
-    "module-alias": "^2.2.2",
-    "pg": "^8.10.0",
-    "winston": "^3.8.2"
+    "bcrypt": "5.1.0",
+    "cors": "2.8.5",
+    "express": "4.18.2",
+    "express-winston": "4.2.0",
+    "jsonwebtoken": "9.0.0",
+    "knex": "2.4.2",
+    "module-alias": "2.2.2",
+    "pg": "8.10.0",
+    "winston": "3.8.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "2.0.22"
   },
   "_moduleAliases": {
     "@Controller": "api/controllers",
